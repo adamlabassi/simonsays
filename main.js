@@ -18,6 +18,7 @@ indice = 0
 
 
 
+
 function charToColor(color){
     switch(color.toLowerCase()){
 
@@ -67,7 +68,19 @@ function generarSecuencia(numColores){
 }
 
 function tColorToString(color){
-    
+    switch(color){
+        case color == tColores.rojo:
+            return "rojo"
+        
+        case color == tColores.verde:
+            return "verde"
+        
+        case color == tColores.azul:
+            return "azul"
+        
+        case color == tColores.dorado:
+            return "dorado"
+    }
 }
 
 console.log(generarSecuencia())
