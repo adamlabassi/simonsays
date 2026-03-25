@@ -16,6 +16,36 @@ numColores = 4
 secuenciaColores = 0
 indice = 0
 
+// Código necesario para poder leer de consola
+const readline = require("readline");
+
+// Función auxiliar para hacer preguntas al usuario y esperar su respuesta. La usaremos cada vez que queramos preguntar algo
+function pregunta(rl, texto) {
+  return new Promise((resolve) => {
+    rl.question(texto, resolve);
+  });
+}
+
+// Llamada a la función principal: inicializa el juego y gestiona la interacción con el usuario
+async function main() {
+  process.stdin.resume();
+  const rl = readline.createInterface({
+    input:  process.stdin,
+    output: process.stdout,
+  });
+
+  console.log("¡Bienvenido a Simon dice!");
+  const nombre = await pregunta(rl, "¿Cuál es tu nombre? ");
+  console.log(`Hola ${nombre}, pulsa una tecla para empezar a jugar.`);
+
+  await pregunta(rl, "");
+  await comenzarJuego(nombre, rl);
+
+  rl.close();
+}
+
+
+
 
 
 
@@ -51,6 +81,34 @@ function intToColor(numero){
 
 
 }
+function tColorToString(color){
+    switch(color){
+        // case color == tColores.rojo:
+        //     return "rojo"
+        
+        // case color == tColores.verde:
+        //     return "verde"
+        
+        // case color == tColores.azul:
+        //     return "azul"
+        
+        // case color == tColores.dorado:
+        //     return "dorado"
+        case tColores.rojo:
+            return "rojo"
+        
+        case tColores.verde:
+            return "verde"
+        
+        case tColores.azul:
+            return "azul"
+        
+        case tColores.dorado:
+            return "dorado"
+    }
+}
+
+
 
 
 function generarSecuencia(numColores){
@@ -67,21 +125,48 @@ function generarSecuencia(numColores){
     return array
 }
 
-function tColorToString(color){
-    switch(color){
-        case color == tColores.rojo:
-            return "rojo"
-        
-        case color == tColores.verde:
-            return "verde"
-        
-        case color == tColores.azul:
-            return "azul"
-        
-        case color == tColores.dorado:
-            return "dorado"
-    }
+
+function comprobarColor(secuenciaColores, indice, colores){
+
+    
 }
 
-console.log(generarSecuencia())
+//console.log(generarSecuencia())
 
+
+/*
+
+Apunte para la función main
+devuelve strings
+imprime en columna
+
+for (let i = 0; i < secuencia.length; i++) {
+    const colorInt = secuencia[i];
+    const color = intToColor(colorInt);
+    const texto = tColorToString(color);
+    console.log(texto);
+}
+
+*/
+
+
+/*Apunte para la función main
+devuelve strings
+imprime en fila
+
+const secuencia = generarSecuencia(12);
+
+let resultado = "";
+
+for (let i = 0; i < secuencia.length; i++) {
+    const colorInt = secuencia[i];
+    const color = intToColor(colorInt);
+    const texto = tColorToString(color);
+    resultado += texto + " ";
+}
+
+console.log(resultado.trim());
+*/
+
+// Necesario para la captura de errores
+//main().catch(console.error);
