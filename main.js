@@ -1,9 +1,4 @@
 const tColores = {
-    // rojo: "R",
-    // verde:"V",
-    // azul:"A",
-    // dorado:"D"
-
     rojo: 0,
     verde: 1,
     azul: 2,
@@ -85,19 +80,9 @@ function intToColor(numero){
 
 
 }
+
 function tColorToString(color){
     switch(color){
-        // case color == tColores.rojo:
-        //     return "rojo"
-        
-        // case color == tColores.verde:
-        //     return "verde"
-        
-        // case color == tColores.azul:
-        //     return "azul"
-        
-        // case color == tColores.dorado:
-        //     return "dorado"
         case tColores.rojo:
             return "rojo"
         
@@ -114,7 +99,7 @@ function tColorToString(color){
 
 
 
-//Falta usar numColores
+
 function generarSecuencia(numColores){
 
     //const MAX_COLORES_SEQ = new Array(12)
@@ -129,14 +114,10 @@ function generarSecuencia(numColores){
     return array
 }
 
-console.log(generarSecuencia(numColores))
 
 function comprobarColor(secuenciaColores, indice, colores){
 
-    for(indice = 0; indice> secuenciaColores.length; indice++ ){
-        
-    }
-    
+    return charToColor(color)==secuenciaColores[indice];
     
 }
 
