@@ -12,7 +12,9 @@ const tColores = {
 
 //color = "V"
 //numero = 0
-numColores = 4
+
+const MAX_COLORES_SEQ = new Array(12)
+numColores = Object.keys(tColores).length
 secuenciaColores = 0
 indice = 0
 
@@ -77,6 +79,8 @@ function intToColor(numero){
         return tColores.azul
     case 3:
         return tColores.dorado
+    default:
+        return null;
     }
 
 
@@ -110,24 +114,29 @@ function tColorToString(color){
 
 
 
-
+//Falta usar numColores
 function generarSecuencia(numColores){
 
-    const MAX_COLORES_SEQ = new Array(12)
+    //const MAX_COLORES_SEQ = new Array(12)
 
     const array = new Array(MAX_COLORES_SEQ.length)
 
 
-    for(i=0;i<array.length;i++){
-        array[i]=(Math.floor(Math.random()*4))
+    for(i=0; i<MAX_COLORES_SEQ.length; i++){
+        array[i]=(Math.floor(Math.random()*numColores))
     }
 
     return array
 }
 
+console.log(generarSecuencia(numColores))
 
 function comprobarColor(secuenciaColores, indice, colores){
 
+    for(indice = 0; indice> secuenciaColores.length; indice++ ){
+        
+    }
+    
     
 }
 
@@ -167,6 +176,8 @@ for (let i = 0; i < secuencia.length; i++) {
 
 console.log(resultado.trim());
 */
+
+
 
 // Necesario para la captura de errores
 //main().catch(console.error);
