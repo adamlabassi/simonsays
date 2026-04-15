@@ -1,3 +1,13 @@
+// Código necesario para poder leer de consola
+const readline = require("readline");
+
+// Función auxiliar para hacer preguntas al usuario y esperar su respuesta. La usaremos cada vez que queramos preguntar algo
+function pregunta(rl, texto) {
+  return new Promise((resolve) => {
+    rl.question(texto, resolve);
+  });
+}
+
 const tColores = {
     rojo: 0,
     verde: 1,
@@ -13,15 +23,20 @@ numColores = Object.keys(tColores).length
 secuenciaColores = 0
 indice = 0
 
-// Código necesario para poder leer de consola
-const readline = require("readline");
+// // Código necesario para poder leer de consola
+// const readline = require("readline");
 
-// Función auxiliar para hacer preguntas al usuario y esperar su respuesta. La usaremos cada vez que queramos preguntar algo
-function pregunta(rl, texto) {
-  return new Promise((resolve) => {
-    rl.question(texto, resolve);
-  });
-}
+// // Función auxiliar para hacer preguntas al usuario y esperar su respuesta. La usaremos cada vez que queramos preguntar algo
+// function pregunta(rl, texto) {
+//   return new Promise((resolve) => {
+//     rl.question(texto, resolve);
+//   });
+// }
+
+
+
+
+
 
 // Llamada a la función principal: inicializa el juego y gestiona la interacción con el usuario
 async function main() {
@@ -115,13 +130,21 @@ function generarSecuencia(numColores){
 }
 
 
-function comprobarColor(secuenciaColores, indice, colores){
+function comprobarColor(secuenciaColores, indice, color){
 
-    return charToColor(color)==secuenciaColores[indice];
+    return color==secuenciaColores[indice];
     
 }
 
-//console.log(generarSecuencia())
+function mostrarSecuencia(secuenciaColores, numero) {
+    let resultado = "";
+    for (let i = 0; i < numero; i++) {
+        resultado += tColorToString(secuenciaColores[i]) + " ";
+    }
+    console.log(`Secuencia: ${resultado.trim()}`);
+}
+
+
 
 
 /*
@@ -161,4 +184,51 @@ console.log(resultado.trim());
 
 
 // Necesario para la captura de errores
-//main().catch(console.error);
+
+
+async function comenzarJuego(nombre, rl) {
+    const numColores = Object.keys(tColores).length;
+    const secuenciaColores = generarSecuencia(numColores);
+    let longitudActual = 3;
+    let juegoTerminado = false;
+
+    while (!juegoTerminado && longitudActual <= MAX_COLORES_SEQ.length) {
+        let fallo = false;
+
+        mostrarSecuencia(secuenciaColores, longitudActual);
+        await pregunta(rl, "Memoriza la secuencia y pulsa Enter para continuar...");
+        console.clear();
+
+        console.log(`${nombre}, introduce la secuencia de ${longitudActual} colores:`);
+        console.log("(R = Rojo, V = Verde, A = Azul, D = Dorado)");
+
+        for (let i = 0; i < longitudActual && !fallo; i++) {
+            let color = null;
+            while (color === null) {
+                const entrada = await pregunta(rl, `Color ${i + 1}: `);
+                color = charToColor(entrada);
+                if (color === null) {
+                    console.log("Color no válido, inténtalo de nuevo.");
+                }
+            }
+            if (!comprobarColor(secuenciaColores, i, color)) {
+                fallo = true;
+            }
+        }
+
+        if (fallo) {
+            console.log(`Has fallado. ¡Fin de la partida!`);
+            juegoTerminado = true;
+        } else if (longitudActual === MAX_COLORES_SEQ.length) {
+            console.log(`¡Enhorabuena ${nombre}, has ganado!`);
+            juegoTerminado = true;
+        } else {
+            console.log(`¡Enhorabuena, has acertado la secuencia número ${longitudActual - 2}!`);
+            longitudActual++;
+        }
+    }
+}
+
+
+
+main().catch(console.error);
