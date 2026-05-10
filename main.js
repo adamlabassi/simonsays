@@ -12,7 +12,10 @@ const tColores = {
     rojo: 0,
     verde: 1,
     azul: 2,
-    dorado: 3
+    dorado: 3,
+    blanco: 4,
+    marron: 5,
+    naranja: 6
 }
 
 //color = "V"
