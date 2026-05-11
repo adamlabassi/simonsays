@@ -26,19 +26,6 @@ numColores = Object.keys(tColores).length
 secuenciaColores = 0
 indice = 0
 
-// // Código necesario para poder leer de consola
-// const readline = require("readline");
-
-// // Función auxiliar para hacer preguntas al usuario y esperar su respuesta. La usaremos cada vez que queramos preguntar algo
-// function pregunta(rl, texto) {
-//   return new Promise((resolve) => {
-//     rl.question(texto, resolve);
-//   });
-// }
-
-
-
-
 
 
 // Llamada a la función principal: inicializa el juego y gestiona la interacción con el usuario
@@ -58,9 +45,6 @@ async function main() {
 
   rl.close();
 }
-
-
-
 
 
 
@@ -170,46 +154,6 @@ function mostrarSecuencia(secuenciaColores, numero) {
 
 
 
-
-/*
-
-Apunte para la función main
-devuelve strings
-imprime en columna
-
-for (let i = 0; i < secuencia.length; i++) {
-    const colorInt = secuencia[i];
-    const color = intToColor(colorInt);
-    const texto = tColorToString(color);
-    console.log(texto);
-}
-
-*/
-
-
-/*Apunte para la función main
-devuelve strings
-imprime en fila
-
-const secuencia = generarSecuencia(12);
-
-let resultado = "";
-
-for (let i = 0; i < secuencia.length; i++) {
-    const colorInt = secuencia[i];
-    const color = intToColor(colorInt);
-    const texto = tColorToString(color);
-    resultado += texto + " ";
-}
-
-console.log(resultado.trim());
-*/
-
-
-
-// Necesario para la captura de errores
-
-
 async function comenzarJuego(nombre, rl) {
     const numColores = Object.keys(tColores).length;
     const secuenciaColores = generarSecuencia(numColores);
@@ -224,7 +168,7 @@ async function comenzarJuego(nombre, rl) {
         console.clear();
 
         console.log(`${nombre}, introduce la secuencia de ${longitudActual} colores:`);
-        console.log("(R = Rojo, V = Verde, A = Azul, D = Dorado)");
+        console.log("(R = Rojo, V = Verde, A = Azul, D = Dorado, B = Blanco, M = Marrón, N = Naranja)");
 
         for (let i = 0; i < longitudActual && !fallo; i++) {
             let color = null;
