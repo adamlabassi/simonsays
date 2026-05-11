@@ -75,6 +75,8 @@ function charToColor(color){
             return tColores.azul
         case "d":
             return tColores.dorado
+        case "b":
+            return tColores.blanco    
         default:
             return null;        
     }   
