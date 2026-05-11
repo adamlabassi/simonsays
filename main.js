@@ -76,7 +76,11 @@ function charToColor(color){
         case "d":
             return tColores.dorado
         case "b":
-            return tColores.blanco    
+            return tColores.blanco
+        case "m":
+            return tColores.marron
+        case "n":
+            return tColores.naranja            
         default:
             return null;        
     }   
@@ -94,6 +98,12 @@ function intToColor(numero){
         return tColores.azul
     case 3:
         return tColores.dorado
+    case 4: 
+        return tColores.blanco
+    case 5:
+        return tColores.marron
+    case 6:
+        return tColores.naranja            
     default:
         return null;
     }
@@ -114,6 +124,15 @@ function tColorToString(color){
         
         case tColores.dorado:
             return "dorado"
+        
+        case tColores.blanco:
+            return "blanco"
+        
+        case tColores.marron:
+            return "marron"
+
+        case tColores.naranja:
+            return "naranja"
     }
 }
 
