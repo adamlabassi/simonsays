@@ -8,6 +8,11 @@ function pregunta(rl, texto) {
   });
 }
 
+const tModo = {
+    facil: 1,
+    dificil: 2
+}
+
 const tColores = {
     rojo: 0,
     verde: 1,
@@ -21,10 +26,15 @@ const tColores = {
 //color = "V"
 //numero = 0
 
+const MAX_COLORES_FACIL = 4;
+const MAX_COLORES_DIFICIL = 7;
 const MAX_COLORES_SEQ = new Array(12)
 numColores = Object.keys(tColores).length
 secuenciaColores = 0
 indice = 0
+
+
+
 
 
 
@@ -38,10 +48,27 @@ async function main() {
 
   console.log("¡Bienvenido a Simon dice!");
   const nombre = await pregunta(rl, "¿Cuál es tu nombre? ");
-  console.log(`Hola ${nombre}, pulsa una tecla para empezar a jugar.`);
+  console.log(`Hola ${nombre}`);
 
-  await pregunta(rl, "");
-  await comenzarJuego(nombre, rl);
+  let opcion = -1;
+
+  while(opcion != "0") {
+    console.log("Elija una opción para continuar: ")
+    console.log("0: Salir")
+    console.log("1: Jugar en modo sencillo")
+    console.log("2: Jugar en modo difícil")
+
+    opcion = await pregunta(rl, "Opcion: ")
+
+    if(opcion === "1"){
+        await comenzarJuego(nombre, rl, tModo.facil, 3)
+    }else if (opcion === "2"){
+        await comenzarJuego(nombre, rl, tModo.dificil, 3)
+    }
+  }
+
+//   await pregunta(rl, "");
+//   await comenzarJuego(nombre, rl);
 
   rl.close();
 }
@@ -123,9 +150,17 @@ function tColorToString(color){
 
 
 
-function generarSecuencia(numColores){
+function generarSecuencia(modo){
 
     //const MAX_COLORES_SEQ = new Array(12)
+
+    let limite;
+
+    if(modo === tModo.facil){
+        limite = MAX_COLORES_FACIL
+    } else{
+        limite = MAX_COLORES_DIFICIL
+    }
 
     const array = new Array(MAX_COLORES_SEQ.length)
 
@@ -168,7 +203,7 @@ async function comenzarJuego(nombre, rl) {
         console.clear();
 
         console.log(`${nombre}, introduce la secuencia de ${longitudActual} colores:`);
-        console.log("(R = Rojo, V = Verde, A = Azul, D = Dorado, B = Blanco, M = Marrón, N = Naranja)");
+        console.log("(R = Rojo, V = Verde, A = Azul, D = Dorado, B = Blanco, M = Marrón, N = Naranja, x = Ayuda)");
 
         for (let i = 0; i < longitudActual && !fallo; i++) {
             let color = null;
